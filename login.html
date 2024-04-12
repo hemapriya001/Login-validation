@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login validation</title>
+
+    <style>
+        body {
+            height: 100vh;
+            overflow-x: hidden;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #login {
+            width: 400px;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            padding: 2%;
+            margin: 2%;
+            background-color: cornsilk;
+        }
+
+        .er {
+            color: red;
+            text-align: left;
+        }
+
+        .i {
+            margin-left: 50px;
+            width: 300px;
+            height: 7vh;
+            border-radius: 5px;
+        }
+
+        #pwInput {
+            margin-top: 19px;
+        }
+
+        h2 {
+            color: black;
+            text-align: center;
+        }
+
+        button {
+            align-self: center;
+            width: 150px;
+            height: 7vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="login">
+        <h2>LOGIN VALIDATION </h2>
+        <input class="i" id="mInput" type="mail" onchange="validateMail(event)" placeholder="Enter your email address">
+        <input class="i" id="pwInput" type="password" onchange="validatePw(event)" placeholder="Enter your password">
+
+        <p class="er" id="mError"></p>
+        <p class="er" id="pwError"></p>
+
+        <button onclick="go()" id="goo"><b>Log in</b></button>
+    </div>
+
+    <script>
+        let input1;
+        function validateMail(e) {
+            console.log(e.target.value)
+            input1 = e.target.value
+
+            mailInput = document.getElementById('mInput');
+            mailError = document.getElementById('mError');
+
+            mail = mailInput.value.trim()
+
+            if (!mail) {
+                mailError.innerText = "Email field can't be empty";
+            } else if (!mail.includes('@')) {
+                mailError.innerText = "Email address must contain '@'";
+            } else if (!mail.endsWith('.com')) {
+                mailError.innerText = "Email address must end with '.com'";
+            } else if (!mail.charAt(0).match(/[A-Za-z]/)) {
+                mailError.innerText = "Email address must start with a letter";
+            } else {
+                mailError.innerText = "";
+            }
+        }
+
+        let input2;
+        function validatePw(e) {
+            console.log(e.target.value)
+            input2 = e.target.value
+
+            passwordInput = document.getElementById('pwInput');
+            passwordError = document.getElementById('pwError');
+
+            password = passwordInput.value.trim();
+
+            if (!password) {
+                passwordError.innerText = "Password field can't be empty";
+            } else if (password.length < 8) {
+                passwordError.innerText = "Password length should be at least 8 characters";
+            } else if (!password.match(/[0-9]/)) {
+                passwordError.innerText = "Password must contain at least one number";
+            } else if (!password.match(/[A-Z]/)) {
+                passwordError.innerText = "Password must contain at least one uppercase letter";
+            } else if (!password.match(/[a-z]/)) {
+                passwordError.innerText = "Password must contain at least one lowercase letter";
+            } else if (!password.match(/[^a-zA-Z0-9]/)) {
+                passwordError.innerText = "Password must contain at least one symbol";
+            } else {
+                passwordError.innerText = "";
+            }
+        }
+
+        function go() {
+            if (passwordError && mailError == "")
+                console.log("success")
+            window.location.href = "day3.html"
+        }
+    </script>
+</body>
+
+</html>
