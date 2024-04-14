@@ -86,8 +86,8 @@
                 mailError.innerText = "Email address must end with '.com'";
             } else if (!mail.charAt(0).match(/[A-Za-z]/)) {
                 mailError.innerText = "Email address must start with a letter";
-            } else if (mail.includes(' ')) {
-                mailError.innerText = "Email address must not whitespaces";
+            } else if (mail.includes(" ")) {
+                mailError.innerText = "Email address must not contain whitespaces";
             } else {
                 mailError.innerText = "";
             }
@@ -121,9 +121,10 @@
         }
 
         function go() {
+            let passwordError = document.getElementById('pwError').innerText;
+            let mailError = document.getElementById('mError').innerText;
 
-            
-            if (passwordError  && mailError == "")
+            if (passwordError === "" && mailError === "")
                 alert("You have successfully logged in!")
         }
     </script>
